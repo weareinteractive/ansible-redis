@@ -83,7 +83,7 @@ redis_service_state: started
       - 'ppa:rwky/redis'
     redis_bind:
       - 127.0.0.1
-    redis_databases: 2
+    redis_databases: 16
 ```
 
 ## Notes
