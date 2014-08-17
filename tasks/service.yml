@@ -1,0 +1,15 @@
+---
+
+# Flush handlers before ensuring the service is started to prevent a start and then restart
+#
+- name: Flushing handlers to apply config changes
+  meta: flush_handlers
+
+- name: Configuring service
+  service: >
+    name=redis-server
+    state={{ redis_service_state }}
+    enabled={{ redis_service_enabled }}
+  tags:
+    - database:nosql
+    - redis

@@ -1,0 +1,12 @@
+---
+
+- hosts: all
+  roles:
+    - franklinkim.apt
+    - franklinkim.redis
+  vars:
+    apt_repositories:
+      - 'ppa:rwky/redis'
+    redis_bind:
+      - 127.0.0.1
+    redis_databases: 2

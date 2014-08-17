@@ -1,0 +1,13 @@
+---
+
+- name: Configuring
+  template: >
+    src=etc-redis-redis.conf.j2
+    dest=/etc/redis/redis.conf
+    owner=root
+    group=root
+    mode=0644
+  notify: restart redis-server
+  tags:
+    - database:nosql
+    - redis
