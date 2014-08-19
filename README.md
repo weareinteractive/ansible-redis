@@ -7,6 +7,7 @@
 > 
 > * installs redis
 > * configures redis
+> * configures service
 
 ## Installation
 
@@ -30,7 +31,7 @@ $ git clone https://github.com/weareinteractive/ansible-redis.git
 
 ## Variables
 
-Here is a list of all the default variables for this role, which are also available in defaults/main.yml.
+Here is a list of all the default variables for this role, which are also available in `defaults/main.yml`.
 
 ```
 # Accept connections on the specified port, default is 6379.
@@ -68,7 +69,8 @@ redis_service_state: started
 
 ## Handlers
 
-* `reload redis-server` 
+These are the handlers that are defined in `handlers/main.yml`.
+
 * `restart redis-server` 
 
 ## Example playbook

@@ -4,6 +4,3 @@
 #
 - name: restart redis-server
   service: name=redis-server state=restarted
-
-- name: reload redis-server
-  service: name=redis-server state=reloaded

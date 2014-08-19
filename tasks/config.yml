@@ -11,3 +11,4 @@
   tags:
     - database:nosql
     - redis
+    - config
