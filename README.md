@@ -1,10 +1,12 @@
 # Ansible Redis Role
 
-[![Build Status](https://travis-ci.org/weareinteractive/ansible-redis.png?branch=master)](https://travis-ci.org/weareinteractive/ansible-redis)
-[![Stories in Ready](https://badge.waffle.io/weareinteractive/ansible-redis.svg?label=ready&title=Ready)](http://waffle.io/weareinteractive/ansible-redis)
+[![Build Status](https://img.shields.io/travis/weareinteractive/ansible-redis.svg)](https://travis-ci.org/weareinteractive/ansible-redis)
+[![Galaxy](http://img.shields.io/badge/galaxy-franklinkim.redis-blue.svg)](https://galaxy.ansible.com/list#/roles/1402)
+[![GitHub Tags](https://img.shields.io/github/tag/weareinteractive/ansible-redis.svg)](https://github.com/weareinteractive/ansible-redis)
+[![GitHub Stars](https://img.shields.io/github/stars/weareinteractive/ansible-redis.svg)](https://github.com/weareinteractive/ansible-redis)
 
-> `redis` is an [ansible](http://www.ansible.com) role which: 
-> 
+> `redis` is an [ansible](http://www.ansible.com) role which:
+>
 > * installs redis
 > * configures redis
 > * configures service
@@ -17,16 +19,16 @@ Using `ansible-galaxy`:
 $ ansible-galaxy install franklinkim.redis
 ```
 
-Using `arm` ([Ansible Role Manager](https://github.com/mirskytech/ansible-role-manager/)):
+Using `requirements.yml`:
 
 ```
-$ arm install franklinkim.redis
+- src: franklinkim.redis
 ```
 
 Using `git`:
 
 ```
-$ git clone https://github.com/weareinteractive/ansible-redis.git
+$ git clone https://github.com/weareinteractive/ansible-redis.git franklinkim.redis
 ```
 
 ## Variables
@@ -61,6 +63,10 @@ redis_save:
   - 900 1
   - 300 10
   - 60 10000
+# apt repository
+redis_repository: ppa:chris-lea/redis-server
+# package name (version)
+redis_package: redis-server
 # start on boot
 redis_service_enabled: yes
 # current state: started, stopped
@@ -71,30 +77,19 @@ redis_service_state: started
 
 These are the handlers that are defined in `handlers/main.yml`.
 
-* `restart redis-server` 
+* `restart redis-server`
 
 ## Example playbook
 
 ```
 - hosts: all
+  sudo: yes
   roles:
-    - franklinkim.apt
     - franklinkim.redis
   vars:
-    apt_repositories:
-      - 'ppa:rwky/redis'
     redis_bind:
       - 127.0.0.1
-    redis_databases: 16
-```
-
-## Notes
-
-You can use `franklinkim.apt` to add a repository to get the latest `redis`:
-
-```
-apt_repositories:
-  - 'ppa:rwky/redis'
+    redis_databases: 2
 ```
 
 ## Testing

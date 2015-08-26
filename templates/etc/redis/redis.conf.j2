@@ -19,11 +19,11 @@
 
 # By default Redis does not run as a daemon. Use 'yes' if you need it.
 # Note that Redis will write a pid file in /var/run/redis.pid when daemonized.
-daemonize {{ redis_daemonize }}
+daemonize {{ 'yes' if redis_daemonize else 'no' }}
 
 # When running daemonized, Redis writes a pid file in /var/run/redis.pid by
 # default. You can specify a custom pid file location here.
-pidfile /var/run/redis/redis.pid
+pidfile /var/run/redis/redis-server.pid
 
 # Accept connections on the specified port, default is 6379.
 # If port 0 is specified Redis will not listen on a TCP socket.
@@ -37,14 +37,13 @@ port {{ redis_port }}
 # Examples:
 #
 # bind 192.168.1.100 10.0.0.1
-# bind 127.0.0.1
-{{ print_array('bind', redis_bind) }}
+bind {{ redis_bind | join(" ") }}
 
 # Specify the path for the unix socket that will be used to listen for
 # incoming connections. There is no default, so Redis will not listen
 # on a unix socket when not specified.
 #
-# unixsocket /tmp/redis.sock
+# unixsocket /var/run/redis/redis.sock
 # unixsocketperm 755
 
 # Close the connection after a client is idle for N seconds (0 to disable)
@@ -77,11 +76,11 @@ loglevel {{ redis_loglevel }}
 # Specify the log file name. Also the emptry string can be used to force
 # Redis to log on the standard output. Note that if you use standard
 # output for logging but daemonize, logs will be sent to /dev/null
-logfile /dev/null
+logfile /var/log/redis/redis-server.log
 
 # To enable logging to the system logger, just set 'syslog-enabled' to yes,
 # and optionally update the other syslog parameters to suit your needs.
-syslog-enabled yes
+# syslog-enabled no
 
 # Specify the syslog identity.
 # syslog-ident redis
@@ -148,7 +147,7 @@ rdbcompression yes
 rdbchecksum yes
 
 # The filename where to dump the DB
-dbfilename redis.rdb
+dbfilename dump.rdb
 
 # The working directory.
 #
@@ -158,7 +157,7 @@ dbfilename redis.rdb
 # The Append Only File will also be created inside this directory.
 #
 # Note that you must specify a directory here, not a file name.
-dir /var/lib/redis/
+dir /var/lib/redis
 
 ################################# REPLICATION #################################
 
@@ -696,4 +695,4 @@ aof-rewrite-incremental-fsync yes
 #
 # include /path/to/local.conf
 # include /path/to/other.conf
-include /etc/redis/conf.d/local.conf
+
