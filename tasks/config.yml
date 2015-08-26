@@ -1,14 +1,12 @@
 ---
 
 - name: Configuring
-  template: >
-    src=etc-redis-redis.conf.j2
-    dest=/etc/redis/redis.conf
-    owner=root
-    group=root
-    mode=0644
+  template:
+    src: "{{ item }}.j2"
+    dest: "/{{ item }}"
+    owner: root
+    group: root
+    mode: "0644"
   notify: restart redis-server
-  tags:
-    - database:nosql
-    - redis
-    - config
+  with_items:
+    - "etc/redis/redis.conf"

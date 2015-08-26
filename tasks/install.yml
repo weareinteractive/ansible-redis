@@ -1,12 +1,11 @@
 ---
 
+- name: Adding apt repository
+  apt_repository:
+    repo: "{{ redis_repository }}"
+    update_cache: yes
+
 - name: Installing packages
-  apt: >
-    pkg={{ item }}
-    state=present
-  with_items:
-    - redis-server
-  tags:
-    - database:nosql
-    - redis
-    - install
+  apt:
+    pkg: "{{ redis_package }}"
+    state: present

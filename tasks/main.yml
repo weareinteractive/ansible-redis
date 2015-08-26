@@ -1,5 +1,22 @@
 ---
 
 - include: install.yml
+  tags:
+    - database:nosql
+    - redis
+    - install
+    - redis-install
+
 - include: config.yml
+  tags:
+    - database:nosql
+    - redis
+    - config
+    - redis-config
+
 - include: service.yml
+  tags:
+    - database:nosql
+    - redis
+    - service
+    - redis-service
