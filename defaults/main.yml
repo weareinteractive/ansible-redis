@@ -1,8 +1,4 @@
 ---
-# For more information about default variables see:
-# http://www.ansibleworks.com/docs/playbooks_variables.html#id26
-#
-
 # Accept connections on the specified port, default is 6379.
 # If port 0 is specified Redis will not listen on a TCP socket.
 redis_port: 6379

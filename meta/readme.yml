@@ -1,0 +1,17 @@
+---
+galaxy_name: weareinteractive.redis
+github_user: weareinteractive
+github_name: ansible-redis
+badges: |
+  [![Build Status](https://img.shields.io/travis/weareinteractive/ansible-redis.svg)](https://travis-ci.org/weareinteractive/ansible-redis)
+  [![Galaxy](http://img.shields.io/badge/galaxy-weareinteractive.redis-blue.svg)](https://galaxy.ansible.com/weareinteractive/redis)
+  [![GitHub Tags](https://img.shields.io/github/tag/weareinteractive/ansible-redis.svg)](https://github.com/weareinteractive/ansible-redis)
+  [![GitHub Stars](https://img.shields.io/github/stars/weareinteractive/ansible-redis.svg)](https://github.com/weareinteractive/ansible-redis)
+description: |
+  > * installs redis
+  > * configures redis
+  > * configures service
+
+  **Note:**
+
+  > Since Ansible Galaxy supports [organization](https://www.ansible.com/blog/ansible-galaxy-2-release) now, this role has moved from `franklinkim.redis` to `weareinteractive.redis`!

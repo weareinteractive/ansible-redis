@@ -1,47 +1,56 @@
-# Ansible Redis Role
+# Ansible weareinteractive.redis role
 
 [![Build Status](https://img.shields.io/travis/weareinteractive/ansible-redis.svg)](https://travis-ci.org/weareinteractive/ansible-redis)
-[![Galaxy](http://img.shields.io/badge/galaxy-franklinkim.redis-blue.svg)](https://galaxy.ansible.com/list#/roles/1402)
+[![Galaxy](http://img.shields.io/badge/galaxy-weareinteractive.redis-blue.svg)](https://galaxy.ansible.com/weareinteractive/redis)
 [![GitHub Tags](https://img.shields.io/github/tag/weareinteractive/ansible-redis.svg)](https://github.com/weareinteractive/ansible-redis)
 [![GitHub Stars](https://img.shields.io/github/stars/weareinteractive/ansible-redis.svg)](https://github.com/weareinteractive/ansible-redis)
 
-> `redis` is an [ansible](http://www.ansible.com) role which:
+> `weareinteractive.redis` is an [Ansible](http://www.ansible.com) role which:
 >
 > * installs redis
 > * configures redis
 > * configures service
 
+**Note:**
+
+> Since Ansible Galaxy supports [organization](https://www.ansible.com/blog/ansible-galaxy-2-release) now, this role has moved from `franklinkim.redis` to `weareinteractive.redis`!
+
 ## Installation
 
 Using `ansible-galaxy`:
 
-```
-$ ansible-galaxy install franklinkim.redis
+```shell
+$ ansible-galaxy install weareinteractive.redis
 ```
 
 Using `requirements.yml`:
 
-```
-- src: franklinkim.redis
+```yaml
+- src: weareinteractive.redis
 ```
 
 Using `git`:
 
+```shell
+$ git clone https://github.com/weareinteractive/ansible-redis.git weareinteractive.redis
 ```
-$ git clone https://github.com/weareinteractive/ansible-redis.git franklinkim.redis
-```
+
+## Dependencies
+
+* Ansible >= 2.0
 
 ## Variables
 
 Here is a list of all the default variables for this role, which are also available in `defaults/main.yml`.
 
-```
+```yaml
+---
 # Accept connections on the specified port, default is 6379.
 # If port 0 is specified Redis will not listen on a TCP socket.
 redis_port: 6379
 # By default Redis does not run as a daemon. Use 'yes' if you need it.
 # Note that Redis will write a pid file in /var/run/redis.pid when daemonized.
-redis_daemonize: 'yes'
+redis_daemonize: yes
 # By default Redis listens for connections from all the network interfaces
 # available on the server. It is possible to listen to just one or multiple
 # interfaces using the "bind" configuration directive, followed by one or
@@ -71,17 +80,31 @@ redis_package: redis-server
 redis_service_enabled: yes
 # current state: started, stopped
 redis_service_state: started
+
 ```
 
 ## Handlers
 
 These are the handlers that are defined in `handlers/main.yml`.
 
-* `restart redis-server`
-
-## Example playbook
+```yaml
+---
+- name: restart redis-server
+  service:
+    name: redis-server
+    state: restarted
+  when: redis_service_state != 'stopped'
 
 ```
+
+
+## Usage
+
+This is an example playbook:
+
+```yaml
+---
+
 - hosts: all
   sudo: yes
   roles:
@@ -90,11 +113,12 @@ These are the handlers that are defined in `handlers/main.yml`.
     redis_bind:
       - 127.0.0.1
     redis_databases: 2
+
 ```
 
 ## Testing
 
-```
+```shell
 $ git clone https://github.com/weareinteractive/ansible-redis.git
 $ cd ansible-redis
 $ vagrant up
@@ -108,6 +132,13 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+*Note: To update the `README.md` file please install and run `ansible-role`:*
+
+```shell
+$ gem install ansible-role
+$ ansible-role docgen
+```
 
 ## License
 Copyright (c) We Are Interactive under the MIT license.

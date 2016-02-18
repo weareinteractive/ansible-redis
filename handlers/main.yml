@@ -1,8 +1,6 @@
 ---
-# Handler to handle common notifications. Handlers are called by other plays.
-# See http://ansible.cc/docs/playbooks.html for more information about handlers.
-#
-
 - name: restart redis-server
-  action: service name=redis-server state=restarted
+  service:
+    name: redis-server
+    state: restarted
   when: redis_service_state != 'stopped'
