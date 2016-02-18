@@ -2,7 +2,7 @@
 
 - hosts: all
   roles:
-    - franklinkim.redis
+    - weareinteractive.redis
   vars:
     redis_bind:
       - 127.0.0.1
